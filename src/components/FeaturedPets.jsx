@@ -1,9 +1,7 @@
 import Link from 'next/link';
 
 const FeaturedPets = async() => {
- const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/petData`,{
-  catche:"no-store"
- });
+ const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/petData`);
   const allPets = await res.json();
   const mockPets = allPets.slice(0, 6);
 

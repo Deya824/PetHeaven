@@ -54,7 +54,7 @@ export default function AdoptionForm({ pet }) {
                         Your adoption request for <strong>{pet.name}</strong> has been sent to the owner. You can track its status in My Requests.
                     </p>
                     <Button
-                        onClick={() => router.push("/dashboard/my-requests")}
+                        onClick={() => router.push("/dashboard/my-request")}
                         className="bg-transparent border border-gray-600 text-white font-bold w-full rounded-2xl"
                     >
                         View My Requests

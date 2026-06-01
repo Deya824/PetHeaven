@@ -1,4 +1,4 @@
-import Navbar from '@/components/Navbar';
+
 import Banner from '@/components/Banner';
 import FeaturedPets from '@/components/FeaturedPets';
 import HowItWorks from '@/components/HowItWorks';
@@ -6,8 +6,8 @@ import WhyAdopt from '@/components/WhyAdopt';
 import SuccessStories from '@/components/SuccessStories';
 import PetCareTips from '@/components/PetCareTips';
 import Stats from '@/components/Stats';
-import Footer from '@/components/Footer';
-export const dynamic = 'force-dynamic';
+
+
 
 export default function Home() {
   return (
