@@ -8,9 +8,11 @@ const Footer = () => {
           
           <div className="flex flex-col space-y-4">
             <div className="flex items-center gap-2">
-              <div className="w-8 h-8 bg-[#f97316] rounded-full flex items-center justify-center text-white font-bold">
-                P
-              </div>
+              <img 
+      src="/icon.png" 
+      alt="PetHaven Logo" 
+      className="w-10 h-10 object-contain"
+    />
               <span className="font-extrabold text-2xl tracking-wide text-white">
                 PetHaven
               </span>

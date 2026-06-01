@@ -26,7 +26,7 @@ const AllPetsPage = () => {
     setIsLoading(true);
     
     // Safety check for the server URL
-    const serverUrl = process.env.NEXT_PUBLIC_SERVER_URL || "http://localhost:5000";
+    const serverUrl = process.env.NEXT_PUBLIC_SERVER_URL ;
     const url = new URL(`${serverUrl}/petData`);
     
     // Add our search and filter parameters to the URL
