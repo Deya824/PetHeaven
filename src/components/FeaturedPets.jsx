@@ -1,7 +1,9 @@
 import Link from 'next/link';
 
 const FeaturedPets = async() => {
- const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/petData`);
+ const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/petData`,{
+  catche:"no-store"
+ });
   const allPets = await res.json();
   const mockPets = allPets.slice(0, 6);
 
@@ -15,7 +17,7 @@ const FeaturedPets = async() => {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {mockPets.map((pet) => (
-            <div key={pet.id} className="bg-[#fcf8e3] rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-shadow border border-gray-100 group">
+            <div key={pet._id} className="bg-[#fcf8e3] rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-shadow border border-gray-100 group">
               <div className="h-64 overflow-hidden">
               <img 
   src={pet.image} 
