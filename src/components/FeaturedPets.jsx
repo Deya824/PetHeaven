@@ -1,14 +1,9 @@
 import Link from 'next/link';
 
-const FeaturedPets = () => {
-  const mockPets = [
-    { id: 1, name: "Max", species: "Dog", breed: "Golden Retriever", age: "2 Years", img: "https://images.unsplash.com/photo-1552053831-71594a27632d?auto=format&fit=crop&w=500&q=80" },
-    { id: 2, name: "Luna", species: "Cat", breed: "Persian", age: "1 Year", img: "https://images.unsplash.com/photo-1513360371669-4adf3dd7dff8?auto=format&fit=crop&w=500&q=80" },
-    { id: 3, name: "Charlie", species: "Dog", breed: "Beagle", age: "3 Months", img: "https://images.unsplash.com/photo-1537151608804-ea2f1fa3f34d?auto=format&fit=crop&w=500&q=80" },
-    { id: 4, name: "Bella", species: "Cat", breed: "Siamese", age: "4 Years", img: "https://images.unsplash.com/photo-1513245543132-31f507417b26?auto=format&fit=crop&w=500&q=80" },
-    { id: 5, name: "Rocky", species: "Dog", breed: "Bulldog", age: "1.5 Years", img: "https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?auto=format&fit=crop&w=500&q=80" },
-    { id: 6, name: "Milo", species: "Cat", breed: "Maine Coon", age: "6 Months", img: "https://images.unsplash.com/photo-1533738363-b7f9aef128ce?auto=format&fit=crop&w=500&q=80" },
-  ];
+const FeaturedPets = async() => {
+ const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/petData`);
+  const allPets = await res.json();
+  const mockPets = allPets.slice(0, 6);
 
   return (
     <section className="py-20 bg-white">
@@ -22,7 +17,11 @@ const FeaturedPets = () => {
           {mockPets.map((pet) => (
             <div key={pet.id} className="bg-[#fcf8e3] rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-shadow border border-gray-100 group">
               <div className="h-64 overflow-hidden">
-                <img src={pet.img} alt={pet.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+              <img 
+  src={pet.image} 
+  alt={pet.name} 
+  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
+/>
               </div>
               <div className="p-6 text-center">
                 <h3 className="text-2xl font-bold text-[#1a1a1a] mb-1">{pet.name}</h3>

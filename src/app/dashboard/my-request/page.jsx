@@ -99,44 +99,50 @@ export default function MyRequestPage() {
                   <th className="p-5 text-gray-400 font-bold text-sm">Actions</th>
                 </tr>
               </thead>
-              <tbody>
-                {requests.map(req => (
-                  <tr key={req._id} className="border-b border-gray-50 hover:bg-[#fcf8e3] transition-colors">
-                    <td className="p-5 font-extrabold text-[#1a1a1a]">{req.petName}</td>
-                    <td className="p-5 font-bold text-gray-500 text-sm">
-                      {req.createdAt ? new Date(req.createdAt).toLocaleDateString() : '2026-02-01'}
-                    </td>
-                    <td className="p-5 font-bold text-gray-500 text-sm">
-                      {req.pickupDate || 'N/A'}
-                    </td>
-                    <td className="p-5">
-                      <span className={`px-3 py-1 rounded-full text-xs font-black capitalize ${
-                        req.status === 'pending' ? 'bg-yellow-100 text-yellow-700' :
-                        req.status === 'approved' ? 'bg-green-100 text-green-700' :
-                        'bg-red-100 text-red-700'
-                      }`}>
-                        {req.status}
-                      </span>
-                    </td>
-                    <td className="p-5">
-                      <div className="flex gap-2">
-                        <button
-                          onClick={() => router.push(`/all-pets/${req.petId}`)}
-                          className="px-4 py-2 bg-[#fcf8e3] text-[#f97316] font-bold rounded-xl border border-orange-100 hover:bg-orange-50 transition-colors text-sm"
-                        >
-                          View
-                        </button>
-                        <button
-                          onClick={() => handleCancel(req._id)}
-                          className="px-4 py-2 bg-red-50 text-red-600 font-bold rounded-xl border border-red-100 hover:bg-red-100 transition-colors text-sm"
-                        >
-                          Cancel
-                        </button>
-                      </div>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
+             <tbody>
+  {requests.map(req => (
+    <tr key={req._id} className="border-b border-gray-50 hover:bg-[#fcf8e3] transition-colors">
+      <td className="p-5 font-extrabold text-[#1a1a1a]">{req.petName}</td>
+      
+      {/* Request Date: Using your existing locale format */}
+      <td className="p-5 font-bold text-gray-500 text-sm">
+        {req.createdAt ? new Date(req.createdAt).toLocaleDateString() : 'N/A'}
+      </td>
+      
+      {/* Pickup Date: Ensuring it displays clean if it's a date string */}
+      <td className="p-5 font-bold text-gray-500 text-sm">
+        {req.pickupDate ? new Date(req.pickupDate).toLocaleDateString() : 'N/A'}
+      </td>
+      
+      <td className="p-5">
+        <span className={`px-3 py-1 rounded-full text-xs font-black capitalize ${
+          req.status === 'pending' ? 'bg-yellow-100 text-yellow-700' :
+          req.status === 'approved' ? 'bg-green-100 text-green-700' :
+          'bg-red-100 text-red-700'
+        }`}>
+          {req.status}
+        </span>
+      </td>
+      
+      <td className="p-5">
+        <div className="flex gap-2">
+          <button
+            onClick={() => router.push(`/all-pets/${req.petId}`)}
+            className="px-4 py-2 bg-[#fcf8e3] text-[#f97316] font-bold rounded-xl border border-orange-100 hover:bg-orange-50 transition-colors text-sm"
+          >
+            View
+          </button>
+          <button
+            onClick={() => handleCancel(req._id)}
+            className="px-4 py-2 bg-red-50 text-red-600 font-bold rounded-xl border border-red-100 hover:bg-red-100 transition-colors text-sm"
+          >
+            Cancel
+          </button>
+        </div>
+      </td>
+    </tr>
+  ))}
+</tbody>
             </table>
           </div>
         )}

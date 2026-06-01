@@ -28,7 +28,7 @@ const AddPetPage = () => {
     petData.adopted = false;
     petData.createdAt = new Date();
 
-    fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/petData/${id}`, {
+    fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/petData`, {
       method: 'POST',
       headers: {
         'content-type': 'application/json'

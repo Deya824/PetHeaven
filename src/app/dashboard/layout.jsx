@@ -9,7 +9,7 @@ export default function DashboardLayout({ children }) {
   const navLinks = [
     { name: 'My Listings', href: '/dashboard/my-listings' },
     { name: 'Add Pet', href: '/dashboard/add-pet' },
-    { name: 'My Requests', href: '/dashboard/my-requests' },
+    { name: 'My Requests', href: '/dashboard/my-request' },
   ];
 
   return (
