@@ -12,7 +12,11 @@ export default function PetDetailsPage() {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/petData/${id}`)
+    fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/petData/${id}`,{
+      headers:{
+        authorization:"logged in"
+      }
+    })
       .then(res => res.json())
       .then(data => {
         setPet(data);
