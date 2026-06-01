@@ -36,9 +36,10 @@ export default function MyListingsPage() {
     };
 
     const updateRequestStatus = async (id, status) => {
+        const {data:tokenData}= await authClient.token();
         await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/adopt-request/${id}`, {
             method: 'PATCH',
-            headers: { 'Content-Type': 'application/json' },
+            headers: { 'Content-Type': 'application/json', 'authorization': `Bearer ${tokenData?.token}` },
             body: JSON.stringify({ status })
         });
         toast.success(`Request ${status}`);
@@ -47,7 +48,11 @@ export default function MyListingsPage() {
     };
 
     const deletePet = async (id) => {
-        await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/pets/${id}`, { method: 'DELETE' });
+        const {data:tokenData}= await authClient.token();
+        await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/pets/${id}`, {
+            method: 'DELETE',
+            headers: { 'authorization': `Bearer ${tokenData?.token}` }
+        });
         toast.success("Listing deleted");
         fetchAllData();
     };

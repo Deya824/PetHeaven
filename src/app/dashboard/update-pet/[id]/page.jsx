@@ -12,11 +12,19 @@ const UpdatePetPage = ({ params }) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [pet, setPet] = useState(null);
 
-  useEffect(() => {
-    fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/petData/${id}`)
-      .then(res => res.json())
-      .then(data => setPet(data));
-  }, [id]);
+useEffect(() => {
+    const fetchData = async () => {
+         const {data:tokenData}= await authClient.token();
+        const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/petData/${id}`, {
+            headers: {
+                'authorization': `Bearer ${tokenData?.token}`
+            }
+        });
+        const data = await res.json();
+        setPet(data);
+    };
+    if (id) fetchData();
+}, [id]);
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -25,10 +33,11 @@ const UpdatePetPage = ({ params }) => {
 
     const formData = new FormData(e.currentTarget);
     const updatedData = Object.fromEntries(formData.entries());
+     const {data:tokenData}= await authClient.token();
 
     const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/petData/${id}`, {
       method: 'PATCH',
-      headers: { 'content-type': 'application/json' },
+      headers: { 'content-type': 'application/json', 'authorization': `Bearer ${tokenData?.token}` },
       body: JSON.stringify(updatedData)
     });
 

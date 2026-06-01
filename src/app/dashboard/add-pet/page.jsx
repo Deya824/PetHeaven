@@ -6,7 +6,7 @@ import { authClient } from '@/lib/auth-client';
 import toast from 'react-hot-toast';
 import { useRouter } from 'next/navigation';
 
-const AddPetPage = () => {
+const AddPetPage =  () => {
   const router = useRouter();
   const [isSubmitting, setIsSubmitting] = useState(false);
   
@@ -14,7 +14,7 @@ const AddPetPage = () => {
   const { data: session } = authClient.useSession();
   const userEmail = session?.user?.email || "Loading...";
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
     const toastId = toast.loading('Adding your pet listing...');
@@ -27,11 +27,12 @@ const AddPetPage = () => {
     petData.ownerName = session?.user?.name;
     petData.adopted = false;
     petData.createdAt = new Date();
-
+const {data:tokenData}= await authClient.token();
     fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/petData`, {
       method: 'POST',
       headers: {
-        'content-type': 'application/json'
+        'content-type': 'application/json',
+        'authorization': `Bearer ${tokenData?.token}`
       },
       body: JSON.stringify(petData)
     }).then(

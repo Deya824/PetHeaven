@@ -30,8 +30,11 @@ export default function MyRequestPage() {
   if (!session?.user) return null;
 
   const handleCancel = async (id) => {
+         const {data:tokenData}= await authClient.token();
+         
     const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/adopt-request/${id}`, {
-      method: 'DELETE'
+      method: 'DELETE',
+      headers: { 'authorization': `Bearer ${tokenData?.token}` }
     });
     if (res.ok) {
       toast.success("Request cancelled successfully");
