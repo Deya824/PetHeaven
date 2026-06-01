@@ -47,16 +47,30 @@ export default function MyListingsPage() {
         fetchAllData(); // Refresh badges
     };
 
-    const deletePet = async (id) => {
-        const {data:tokenData}= await authClient.token();
-        await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/pets/${id}`, {
+   const deletePet = async (id) => {
+    
+    const isConfirmed = window.confirm("Are you sure you want to delete this pet listing? This action cannot be undone.");
+    
+   
+    if (!isConfirmed) return;
+
+    try {
+        const { data: tokenData } = await authClient.token();
+        const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/pets/${id}`, {
             method: 'DELETE',
             headers: { 'authorization': `Bearer ${tokenData?.token}` }
         });
-        toast.success("Listing deleted");
-        fetchAllData();
-    };
 
+        if (res.ok) {
+            toast.success("Listing deleted");
+            fetchAllData();
+        } else {
+            toast.error("Failed to delete listing");
+        }
+    } catch (error) {
+        toast.error("An error occurred while deleting.");
+    }
+};
     return (
         <div className="min-h-screen bg-[#fcf8e3] py-12 px-5">
             <div className="max-w-6xl mx-auto">
