@@ -1,6 +1,8 @@
 # PetHaven
 
 ### Purpose
+PetHaven is a comprehensive web application designed to connect animal shelters and rescue organizations with potential adopters. The platform streamlines the adoption process by providing a searchable catalog of available pets, detailed pet profiles, and an integrated system for submitting and managing adoption requests. The project aims to increase pet adoption rates by offering a user-friendly interface and a secure authentication system.
+
 ### Live URL
 https://my-app-omega-gray-47.vercel.app/
 
